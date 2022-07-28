@@ -2,7 +2,7 @@ from random import randrange
 from fastapi import Depends, FastAPI, HTTPException, Response, status
 import psycopg2
 from psycopg2.extras import RealDictCursor
-from models.post import Post
+from .models.post import Post
 import time
 from .db.database import engine, SessionLocal
 from .db.models import posts
