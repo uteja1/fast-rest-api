@@ -4,35 +4,26 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 from .models.post import Post
 import time
-from .db.database import engine, SessionLocal
-from .db.models import posts
+from .db.database import engine, get_db
+from .db.models.posts_vo import Post_VO, Base
 from sqlalchemy.orm import Session
 
 app = FastAPI()
 
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# Base.metadata.create_all(bind=engine)
 
-
-posts.Base.metadata.create_all(bind=engine)
-
-my_posts = [
-    {
-        "id": 1,
-        "title": "beaches in florida",
-        "content": "check out these beaches",
-    },
-    {
-        "id": 2,
-        "title": "pizza in florida",
-        "content": "check out these pizza",
-    },
-]
+# my_posts = [
+#     {
+#         "id": 1,
+#         "title": "beaches in florida",
+#         "content": "check out these beaches",
+#     },
+#     {
+#         "id": 2,
+#         "title": "pizza in florida",
+#         "content": "check out these pizza",
+#     },
+# ]
 
 while True:
     try:
@@ -54,7 +45,8 @@ while True:
 
 @app.get("/getPostgres")
 def test_posts(db: Session = Depends(get_db)):
-    return {"status": "success"}
+    get_posts = db.query(Post_VO).all()
+    return {"data": get_posts}
 
 
 @app.get("/")
@@ -69,16 +61,16 @@ def get_posts():
     return {"data": posts}
 
 
-def find_post(id):
-    for post in my_posts:
-        if post["id"] == id:
-            return post
+# def find_post(id):
+#     for post in my_posts:
+#         if post["id"] == id:
+#             return post
 
 
-def find_index_post(id):
-    for i, post in enumerate(my_posts):
-        if post["id"] == id:
-            return i
+# def find_index_post(id):
+#     for i, post in enumerate(my_posts):
+#         if post["id"] == id:
+#             return i
 
 
 @app.get("/post/{id}")

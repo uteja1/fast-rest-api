@@ -6,4 +6,4 @@ class Post(BaseModel):
     title: StrictStr
     content: StrictStr
     published: bool = True
-    rating: Optional[int] = None
+    # rating: Optional[int] = None
