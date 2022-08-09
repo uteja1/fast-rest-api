@@ -1,7 +1,7 @@
 from http.client import HTTPException
 from fastapi import status
 from app.db.models.posts_vo import Post_VO
-from app.models.post import Post
+from app.schemas.post import Post
 from sqlalchemy.orm import Session
 from ..db_base import Base, get_db, db_session
 

@@ -11,7 +11,7 @@ from app.executors.posts_executor import (
     get_post_by_id_executor,
     update_post_by_id_executor,
 )
-from .models.post import Post
+from .schemas.post import Post
 import time
 
 # from .db.database import get_db

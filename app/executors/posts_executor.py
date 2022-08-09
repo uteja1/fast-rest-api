@@ -4,7 +4,7 @@ from app.db.handlers.posts_handler import (
     persist_new_post_handler,
     update_post_by_id_handler,
 )
-from app.models.post import Post
+from app.schemas.post import Post
 from sqlalchemy.orm import Session
 
 
