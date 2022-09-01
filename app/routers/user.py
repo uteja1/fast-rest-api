@@ -6,11 +6,11 @@ from app.schemas.user_create import UserCreate
 from app.executors.user_executor import create_user_executor, get_user_executor
 from app.schemas.user_create_response import UserCreateResponse
 
-router = APIRouter()
+router = APIRouter(prefix="/user")
 
 
 @router.post(
-    "/user",
+    "/",
     status_code=status.HTTP_201_CREATED,
     response_model=UserCreateResponse,
 )
@@ -20,7 +20,7 @@ def create_user(new_user: UserCreate, db: Session = Depends(get_db)):
 
 
 @router.get(
-    "/user/{id}",
+    "/{id}",
     status_code=status.HTTP_202_ACCEPTED,
     response_model=UserCreateResponse,
 )
