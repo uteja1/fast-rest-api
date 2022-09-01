@@ -1,12 +1,11 @@
 from datetime import datetime
+from pydantic import BaseModel, EmailStr
 
-from app.schemas.post_base import PostBase
 
-
-class PostResponse(PostBase):
+class UserCreateResponse(BaseModel):
     id: int
+    email: EmailStr
     created_at: datetime
-    # rating: Optional[int] = None
 
     class Config:
         orm_mode = True

@@ -1,10 +1,8 @@
-from contextlib import contextmanager
 from contextvars import ContextVar
-from typing import Generator
-import warnings
-from sqlalchemy import create_engine, false, true
+from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
+from typing import Generator
 
 SQLALCHEMY_DATABASE_URL = "postgresql://postgres:admin@localhost/fast-api-db"
 

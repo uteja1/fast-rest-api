@@ -1,3 +1,5 @@
+from sqlalchemy.orm import Session
+
 from app.db.handlers.posts_handler import (
     delete_post_by_id_handler,
     get_post_by_id_handler,
@@ -5,7 +7,6 @@ from app.db.handlers.posts_handler import (
     update_post_by_id_handler,
 )
 from app.schemas.post import Post
-from sqlalchemy.orm import Session
 
 
 def create_post_executor(db: Session, new_post: Post):

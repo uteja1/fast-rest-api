@@ -1,21 +1,20 @@
-from http.client import HTTPException
-from fastapi import status
+from sqlalchemy.orm import Session
+
+
 from app.db.models.posts_vo import Post_VO
 from app.schemas.post import Post
-from sqlalchemy.orm import Session
-from ..db_base import Base, get_db, db_session
 
 
 def persist_new_post_handler(db: Session, new_post: Post):
 
-    new_post_created = Post_VO(
+    new_post = Post_VO(
         title=new_post.title, content=new_post.content, published=new_post.published
     )
-    db.add(new_post_created)
+    db.add(new_post)
     db.commit()
-    db.refresh(new_post_created)
+    db.refresh(new_post)
 
-    return new_post_created
+    return new_post
 
 
 def get_post_by_id_handler(db: Session, id: int):
